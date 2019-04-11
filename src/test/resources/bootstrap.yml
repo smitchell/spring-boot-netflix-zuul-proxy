@@ -1,0 +1,23 @@
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    ROOT: 'ERROR'
+
+server:
+  port: 0
+
+spring:
+  cloud:
+    config:
+      enabled: false
+      override-none: true
+  main:
+    banner-mode: 'off'
+  output:
+    ansi:
+      enabled: ALWAYS
+  zipkin:
+    enabled: false

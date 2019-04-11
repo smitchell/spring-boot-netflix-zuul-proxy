@@ -1,0 +1,26 @@
+example:
+  proxy:
+    logout-url: https://anywhere
+    permit-all-matches: /login
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzxi/2o2/xbs9UkLhL5Cw
+          sU9MjUh7RQyHWuXl1bbFSVg/12Qfw5uGtqk2uSyiA8ND+/Ig3C98sbM4e5lQs6P9
+          eeTPv05lYalaX9qZ81Y1y55jIa+tYg4Vylus1F52rDNMsX+ZCliK9KzL09N8qbh1
+          D2obNQZF6bp5r25B7zoWgrM5wORP02MBWkjFbJ9+pacarikcyUll03C6vGj48X59
+          wuqZjNBOIL+uM/adqjs3jwEpR3xAJUlclWaV8ogp4d56myL4ElgTPW3nKejFaV7c
+          dy2/66+kYg1un2mTTwx6KJKL+T2DtpGW4imunC6mT/RxbJa4Ys2w/P3pyBViNijo
+          IwIDAQAB
+          -----END PUBLIC KEY-----
+
+spring:
+  session:
+    store-type: jdbc

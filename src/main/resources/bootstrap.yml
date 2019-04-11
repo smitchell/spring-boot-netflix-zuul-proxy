@@ -1,0 +1,64 @@
+example:
+  proxy:
+    logout-url: http://proxy-example.local.pcfdev.io/angular-example/
+    permit-all-matches: /login,/angular-example/**,/assets/**,/*.js,/home,/favicon.ico,/*.map,/*.css,/auth-example/**,/robots.txt
+
+zuul:
+  add-proxy-headers: true
+  host:
+    socket-timeout-millis: 3600
+    connect-timeout-millis: 3600
+  ignoredPatterns: /**/health/**,/**/mappings/**
+  ignored-services: "*"
+  routes:
+    auth-service:
+      path: /auth-service/**
+      url: http://auth-service.local.pcfdev.io/
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Vary
+    angular-example:
+      path: /angular-example/**
+      url: http://angular-example-wise-crane.local.pcfdev.io/
+
+security:
+  oauth2:
+    client:
+      accessTokenUri: http://auth-example.local.pcfdev.io/oauth/token
+      userAuthorizationUri: http://auth-example.local.pcfdev.io/oauth/authorize
+      clientId: proxy-example
+      clientSecret: password
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzxi/2o2/xbs9UkLhL5Cw
+          sU9MjUh7RQyHWuXl1bbFSVg/12Qfw5uGtqk2uSyiA8ND+/Ig3C98sbM4e5lQs6P9
+          eeTPv05lYalaX9qZ81Y1y55jIa+tYg4Vylus1F52rDNMsX+ZCliK9KzL09N8qbh1
+          D2obNQZF6bp5r25B7zoWgrM5wORP02MBWkjFbJ9+pacarikcyUll03C6vGj48X59
+          wuqZjNBOIL+uM/adqjs3jwEpR3xAJUlclWaV8ogp4d56myL4ElgTPW3nKejFaV7c
+          dy2/66+kYg1un2mTTwx6KJKL+T2DtpGW4imunC6mT/RxbJa4Ys2w/P3pyBViNijo
+          IwIDAQAB
+          -----END PUBLIC KEY-----
+
+server:
+  servlet:
+    session:
+      cookie:
+        name: UISESSION
+      timeout: 60m
+
+spring:
+  aop:
+    proxy-target-class: true
+  session:
+    store-type: jdbc
+
+logging:
+  level:
+    com.example.proxy.Application: INFO
+    com.netflix.zuul: DEBUG
+    org.springframework.security.oauth2: DEBUG
+    org.springframework.security.config: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth: DEBUG
+    org.springframework.security.oauth.boot: DEBUG
+
