@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -17,13 +18,13 @@ import org.springframework.web.filter.CorsFilter;
 @EnableOAuth2Sso
 //  @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 @Slf4j
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final String[] permitAllMatches;
   private final String logoutSuccessUrl;
 
   @Autowired
-  public SecurityConfiguration(
+  public WebSecurityConfig(
       @Value("${example.proxy.logout-url}") final String logoutSuccessUrl,
       @Value("${example.proxy.permit-all-matches}") final String[] permitAllMatches) {
     this.logoutSuccessUrl = logoutSuccessUrl;
@@ -43,20 +44,37 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   }
 
   @Override
+  public void configure(WebSecurity web) throws Exception {
+    web.ignoring().antMatchers(
+        "/*.css",
+        "/*.js",
+        "/*/webjars/**",
+        "/*/css/**",
+        "/*/images/**",
+        "/favicon.ico");
+  }
+
+  @Override
   protected void configure(HttpSecurity http) throws Exception {
-    log.info("Matches: " + Arrays.toString(permitAllMatches));
+    final String prefix = "Permit match for ";
+    Arrays.stream(permitAllMatches).map(match -> prefix.concat(match)).forEach(log::info);
+    // @formatter:off
     http
-        .logout()
-        .invalidateHttpSession(true).permitAll()
-        .logoutSuccessUrl(logoutSuccessUrl)
-        .and()
+
         .authorizeRequests()
-        .antMatchers(permitAllMatches).permitAll()
+            .antMatchers(permitAllMatches)
+            .permitAll()
         .anyRequest().authenticated()
-        .and()
-        .csrf().disable() //TODO turn this back on
+            .and()
+        .logout()
+            .invalidateHttpSession(true).permitAll()
+            .logoutSuccessUrl(logoutSuccessUrl)
+            .and()
+        .csrf()
+            .disable(); //TODO turn this back on
 //                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-    ;
+    // @formatter:on
+
   }
 
 }

@@ -1,13 +1,20 @@
 example:
   proxy:
-    logout-url: https://anywhere
-    permit-all-matches: /login
+    logout-url: http://zuul-proxy-example.local.pcfdev.io/angular-example/
+    permit-all-matches: /login,/*.css,/*.js,/home,/favicon.ico,/*.map,/robots.txt
+
+logging:
+  level:
+    com.example.proxy.Application: INFO
+    com.netflix.zuul: DEBUG
+    org.springframework.cloud.netflix.zuul: DEBUG
+    org.springframework.security.oauth2: DEBUG
 
 security:
   oauth2:
     client:
-      client-id: client
-      client-secret: secret
+      client-id: proxy-example
+      client-secret: password
     resource:
       jwt:
         keyValue: |

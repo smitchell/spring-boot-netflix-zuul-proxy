@@ -1,7 +1,7 @@
 example:
   proxy:
-    logout-url: http://proxy-example.local.pcfdev.io/angular-example/
-    permit-all-matches: /login,/angular-example/**,/assets/**,/*.js,/home,/favicon.ico,/*.map,/*.css,/auth-example/**,/robots.txt
+    logout-url: http://zuul-proxy-example.local.pcfdev.io/angular-example/
+    permit-all-matches: /login,/*.css,/*.js,/home,/favicon.ico,/*.map,/robots.txt
 
 zuul:
   add-proxy-headers: true
@@ -12,8 +12,8 @@ zuul:
   ignored-services: "*"
   routes:
     auth-service:
-      path: /auth-service/**
-      url: http://auth-service.local.pcfdev.io/
+      path: /auth-example/**
+      url: http://auth-example.local.pcfdev.io/
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Vary
     angular-example:
       path: /angular-example/**
@@ -38,13 +38,13 @@ security:
           dy2/66+kYg1un2mTTwx6KJKL+T2DtpGW4imunC6mT/RxbJa4Ys2w/P3pyBViNijo
           IwIDAQAB
           -----END PUBLIC KEY-----
-
 server:
   servlet:
     session:
       cookie:
         name: UISESSION
       timeout: 60m
+  port: 8090
 
 spring:
   aop:
@@ -56,9 +56,5 @@ logging:
   level:
     com.example.proxy.Application: INFO
     com.netflix.zuul: DEBUG
+    org.springframework.cloud.netflix.zuul: DEBUG
     org.springframework.security.oauth2: DEBUG
-    org.springframework.security.config: DEBUG
-    org.springframework.security: DEBUG
-    org.springframework.security.oauth: DEBUG
-    org.springframework.security.oauth.boot: DEBUG
-

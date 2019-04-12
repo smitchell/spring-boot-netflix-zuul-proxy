@@ -1,7 +1,3 @@
-eureka:
-  client:
-    enabled: false
-
 logging:
   level:
     ROOT: 'ERROR'
@@ -12,7 +8,6 @@ server:
 spring:
   cloud:
     config:
-      enabled: false
       override-none: true
   main:
     banner-mode: 'off'
