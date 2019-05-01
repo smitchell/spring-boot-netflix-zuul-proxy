@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     final String prefix = "Permit match for ";
-    Arrays.stream(permitAllMatches).map(match -> prefix.concat(match)).forEach(log::info);
+    Arrays.stream(permitAllMatches).map(prefix::concat).forEach(log::info);
     // @formatter:off
     http
 

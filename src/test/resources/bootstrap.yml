@@ -1,18 +1,10 @@
-logging:
-  level:
-    ROOT: 'ERROR'
-
-server:
-  port: 0
-
 spring:
+  application:
+    name: zuul-proxy-example
   cloud:
-    config:
-      override-none: true
-  main:
-    banner-mode: 'off'
-  output:
-    ansi:
-      enabled: ALWAYS
-  zipkin:
+    discovery:
+      enabled: false
+
+eureka:
+  client:
     enabled: false

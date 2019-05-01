@@ -1,19 +1,27 @@
 example:
   proxy:
-    logout-url: http://zuul-proxy-example.local.pcfdev.io/angular-example/
+    logout-url: http://zuul-proxy-example.dev.cfdev.sh/angular-example/
     permit-all-matches: /login,/*.css,/*.js,/home,/favicon.ico,/*.map,/robots.txt
 
 logging:
   level:
+    ROOT: ERROR
     com.example.proxy.Application: INFO
     com.netflix.zuul: DEBUG
     org.springframework.cloud.netflix.zuul: DEBUG
     org.springframework.security.oauth2: DEBUG
 
+server:
+  port: 0
+
+spring:
+  session:
+    store-type: jdbc
+
 security:
   oauth2:
     client:
-      client-id: proxy-example
+      client-id: zuul-proxy-example
       client-secret: password
     resource:
       jwt:
@@ -28,6 +36,3 @@ security:
           IwIDAQAB
           -----END PUBLIC KEY-----
 
-spring:
-  session:
-    store-type: jdbc
