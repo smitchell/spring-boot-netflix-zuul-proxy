@@ -20,17 +20,6 @@ import org.springframework.web.filter.CorsFilter;
 @Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  private final String[] permitAllMatches;
-  private final String logoutSuccessUrl;
-
-  @Autowired
-  public WebSecurityConfig(
-      @Value("${example.proxy.logout-url}") final String logoutSuccessUrl,
-      @Value("${example.proxy.permit-all-matches}") final String[] permitAllMatches) {
-    this.logoutSuccessUrl = logoutSuccessUrl;
-    this.permitAllMatches = permitAllMatches;
-  }
-
   @Bean
   public CorsFilter corsFilter() {
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -56,19 +45,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    final String prefix = "Permit match for ";
-    Arrays.stream(permitAllMatches).map(prefix::concat).forEach(log::info);
     // @formatter:off
     http
 
         .authorizeRequests()
-            .antMatchers(permitAllMatches)
+            .antMatchers(new String[]{"/login","/*.css","/*.js","/favicon.ico","/*.map","/robots.txt"})
             .permitAll()
         .anyRequest().authenticated()
             .and()
         .logout()
             .invalidateHttpSession(true).permitAll()
-            .logoutSuccessUrl(logoutSuccessUrl)
+            .logoutSuccessUrl("/angular-example")
             .and()
         .csrf()
             .disable(); //TODO turn this back on

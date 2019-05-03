@@ -1,8 +1,7 @@
+# UPDATE THE PROXY ROUTE WITH THE ROUTE FROM YOUR TEST ENVIRONMENT
 example:
   proxy:
-    logout-url: http://zuul-proxy-example.dev.cfdev.sh/
-    permit-all-matches: /login,/*.css,/*.js,/favicon.ico,/*.map,/robots.txt
-
+    logout-url: http://zuul-proxy-example.test.medzero.cfapps.io/angular-example
 zuul:
   add-proxy-headers: true
   host:
@@ -10,20 +9,21 @@ zuul:
     connect-timeout-millis: 3600
   ignoredPatterns: /**/health/**,/**/mappings/**
   ignored-services: "*"
+  # UPDATE THESE ROUTES WITH ROUTES FROM YOUR TEST ENVIRONMENT
   routes:
     auth-service:
       path: /auth-example/**
-      url: http://auth-example.dev.cfdev.sh/
+      url: http://auth-example.test.medzero.cfapps.io/
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Vary
     angular-example:
       path: /angular-example/**
-      url: http://angular-example.dev.cfdev.sh/
+      url: http://angular-example.test.medzero.cfapps.io/
 
 security:
   oauth2:
     client:
-      accessTokenUri: http://auth-example.dev.cfdev.sh/oauth/token
-      userAuthorizationUri: http://auth-example.dev.cfdev.sh/oauth/authorize
+      accessTokenUri: http://auth-example.test.medzero.cfapps.io/oauth/token
+      userAuthorizationUri: http://auth-example.test.medzero.cfapps.io/oauth/authorize
       clientId: zuul-proxy-example
       clientSecret: password
     resource:
@@ -49,6 +49,12 @@ server:
 spring:
   aop:
     proxy-target-class: true
+  cloud:
+    services:
+      registrationMethod: direct
+    cloudfoundry:
+      username: '**********'
+      password: '**********'
   session:
     store-type: jdbc
 

@@ -2,8 +2,8 @@ spring:
   application:
     name: zuul-proxy-example
 
-eureka:
-  client:
-    serviceUrl:
-      register-with-eureka: true
-      fetch-registry: true
+#eureka:
+#  client:
+#    serviceUrl:
+#      register-with-eureka: true
+#      fetch-registry: true
