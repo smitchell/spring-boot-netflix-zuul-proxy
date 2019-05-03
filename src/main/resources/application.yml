@@ -38,6 +38,20 @@ security:
           dy2/66+kYg1un2mTTwx6KJKL+T2DtpGW4imunC6mT/RxbJa4Ys2w/P3pyBViNijo
           IwIDAQAB
           -----END PUBLIC KEY-----
+
+eureka:
+  client:
+    fetchRegistry: true
+    healthcheck:
+      enabled: true
+    registerWithEureka: true
+    service-url:
+      defaultZone: https://eureka-6e9cd6de-58b7-4b08-a10e-5e176a7a7cea.cfapps.io/eureka/
+
+management:
+  cloudfoundry:
+    skip-ssl-validation: true
+
 server:
   servlet:
     session:
@@ -49,12 +63,6 @@ server:
 spring:
   aop:
     proxy-target-class: true
-  cloud:
-    services:
-      registrationMethod: direct
-    cloudfoundry:
-      username: '**********'
-      password: '**********'
   session:
     store-type: jdbc
 
