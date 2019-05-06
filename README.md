@@ -5,18 +5,18 @@ This is a Zuul Proxy example used to set-up integration tests. Currently, I´m t
 ### PROBLEM STATEMENT
 
 For this integration test, create a PCF Space that includes a service registry and these micro-services:
-* **Angular Example** - If you bypass the proxy and go to the angular example route the page loads. [TRY IT](https://angular-example.test.medzero.cfapps.io).
-* **Authentication Example** - If you bypass the proxy and go to the authenication server root you can sign in an access a protected page. [TRY IT](https://auth-example.test.medzero.cfapps.io/)
+* **Angular Example** - If you bypass the proxy and go to the angular example route the page loads. [TRY IT](https://angular-example.test.medzero.cfapps.io/).
+* **Authentication Example** - If you bypass the proxy and go to the authentication server root you can sign in and access a protected page. [TRY IT](https://auth-example.test.medzero.cfapps.io/)
 * **Zuul Proxy Example** - If you try to access the angular example via the proxy you do not get the expected result. [TRY IT](https://zuul-proxy-example.test.medzero.cfapps.io/angular-example/)
 
 #### Expected Result
 1) User tries to access the Angular site via an SSO-enabled proxy server.
-2) Spring Security on the proxy server redirects the users browser to the Login page on the authentication server.
+2) Spring Security on the proxy server redirects the user´s browser to the Login page on the authentication server.
 3) The user signs in and posts the Login form to the authentication server.
-4) The authentication server creates a JWT oauth2 token and forwards the user to orginally requested Angular site.
+4) The authentication server creates a JWT oauth2 token and forwards the user to the orginally requested Angular site.
 
 #### Actual Results
-The authenticaiton server forwards the user back to the Login page.
+The authentication server forwards the user back to the Login page.
 
 ### How do I run this?
 
