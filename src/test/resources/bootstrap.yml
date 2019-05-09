@@ -1,9 +1,6 @@
 spring:
   application:
     name: zuul-proxy-example
-  cloud:
-    discovery:
-      enabled: false
 
 eureka:
   client:
