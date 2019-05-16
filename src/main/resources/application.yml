@@ -14,7 +14,8 @@ zuul:
     auth-service:
       path: /auth-example/**
       url: http://auth-example.test.medzero.cfapps.io/
-      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Vary
+      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Vary,Authorization
+      stripPrefix: false
     angular-example:
       path: /angular-example/**
       url: http://angular-example.test.medzero.cfapps.io/
