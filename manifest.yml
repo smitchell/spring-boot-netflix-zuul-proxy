@@ -4,6 +4,6 @@ applications:
     name: zuul-proxy-example
     memory: 768m
     path: target/proxy-0.0.1-SNAPSHOT.jar
-    routes:
-      - route: zuul-proxy-example.test.medzero.cfapps.io
+#    routes:
+#      - route: zuul-proxy-example.cfapps.io
 

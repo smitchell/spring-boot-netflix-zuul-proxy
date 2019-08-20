@@ -28,38 +28,47 @@ set some URLs in the application.yml files of the proxy server and authenticatio
 2) Add a Service Registry.
 3) `cf login` or `cf t -s [space name]` to point to the new test space.
 
+### Start all three projects to generate the routes
+The easiest way to get start is to go ahead and build/push all three project for routes to be assigned.
+Next, add the routes to Proxy and Auth projects as shown below:
+
 #### Proxy Server
-1) Edit manifest.yml and change the route to one that works in your test PCS Space.
-2) Edit /src/main/resources/application.yml and change the following properties to match your test Space routes:
-* example:proxy:logout-url
-* zuul:routes:auth-service:url
-* zuul:routes:angular-example:url
-* security:oauth2:client:accessTokenUri
-* security:oauth2:client:userAuthorizationUri
-* eureka:client:service-url:defaultZone
-
-#### Angular Example
-
-1) Clone the Angular Example from here: [https://github.com/smitchell/cloud-foundry-angular-example.git]
-2) Edit manifest.yml and change the route to one that works in your test PCF Space.
-3) Run `ng build --prod`. 
-4) `cf push` to deploy to your test space.
-5) Navigate to the Server Registry and bind the Angular Example app. You will have to restage the app after binding.
+1) Edit manifest.yml and change the route to match the assigned route above.
+2) Edit /src/main/resources/application.yml and change the following properties to match your the assigned routes:
+```
+example:
+  proxy:
+    logout-url: [route assigned to your Proxy service]
+```
 
 #### Spring Security 5 Upgrade SSO Auth Server
+1) Edit manifest.yml and change the route to match the assigned route above.
+```
+    routes:
+      - route: zuul-proxy-example.cfapps.io <-- Use your assigned route
+```
 
-The authentication server automatically generates the list of registered redirect URIs for this example based on two URLs properties
-in /src/main/resources/application.yml: example:auth-url and example:proxy-url.
+2) Edit /src/main/resources/application.yml and change the following properties to match your the assigned routes:
+```
+example:
+  auth-url: [route assigned to your Auth service]
+  proxy-url: [route assigned to your Proxy service]
+```
 
-1) Clone the authentication server from here: [https://github.com/smitchell/spring-security-5-upgrade_sso-auth-server.git]
-2) Edit manifest.yml and change the route to one that works in your test PCF Space.
-3) Edit /src/main/resources/application.yml and set the example:auth-url and example:proxy-url properties for your test Space.
+#### Angular Example
+1) Edit manifest.yml uncomment the route, and change it to match the assigned route above.
+```
+    routes:
+      - route: angular-example.cfapps.io <-- Use your assigned route
+```
+2) Bind the angular instance to the service registry
 
 ### Test Your Setup
-1) Verify the Angular app is running by hitting its assigned route (i.e. [https://angular-example.test.medzero.cfapps.io]). Note, if the app is bound to the service register the context, /angular-example, will get appended to the URL when the page loads.
-2) Verify that the Authentication Server is running by hitting its assign route. Sign in as steve/password.
-3) Verify the proxy is running by hitting its assigned route + /angular-example.
+1) Verify the Angular app is running by hitting its assigned route (i.e. [https://angular-example.cfapps.io]). Note, if the app is bound to the service register the context, /angular-example, will get appended to the URL when the page loads.
+2) Verify that the Authentication Server is running by hitting its assign route (i.e. [https://auth-example.cfapps.io/]). Sign in as steve/password.
+3) Verify the proxy is running by hitting its assigned route + /angular-example (i.e. [https://zuul-proxy-example.cfapps.io/angular-example/]). <-- Note the trailing slash
 
 It **should** load the angular page when you sign in, but as of this writing you get the /login page again instead.
+You may see "Full authentication is required to access this resource" when it attempts to redisplay the /login page.
 
 

@@ -1,6 +1,6 @@
 example:
   proxy:
-    logout-url: http://zuul-proxy-example.dev.cfdev.sh/angular-example/
+    logout-url: https://zuul-proxy-example.cfapps.io/angular-example/
     permit-all-matches: /login,/*.css,/*.js,/home,/favicon.ico,/*.map,/robots.txt
 
 logging:
