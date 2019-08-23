@@ -1,7 +1,7 @@
 # UPDATE THE PROXY ROUTE WITH THE ROUTE FROM YOUR TEST ENVIRONMENT
 example:
   proxy:
-    logout-url: http://zuul-proxy-example.test.medzero.cfapps.io/angular-example
+    logout-url: http://localhost:4200/angular-example
 zuul:
   add-proxy-headers: true
   host:
@@ -13,18 +13,18 @@ zuul:
   routes:
     auth-service:
       path: /auth-example/**
-      url: http://auth-example.test.medzero.cfapps.io/
+      url: http://localhost:4202/
       sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Vary,Authorization
       stripPrefix: false
     angular-example:
       path: /angular-example/**
-      url: http://angular-example.test.medzero.cfapps.io/
+      url: http://localhost:4200/
 
 security:
   oauth2:
     client:
-      accessTokenUri: http://auth-example.test.medzero.cfapps.io/oauth/token
-      userAuthorizationUri: http://auth-example.test.medzero.cfapps.io/oauth/authorize
+      accessTokenUri: http://localhost:4202/oauth/token
+      userAuthorizationUri: http://localhost:4202/oauth/authorize
       clientId: zuul-proxy-example
       clientSecret: password
     resource:
@@ -50,7 +50,7 @@ server:
       cookie:
         name: UISESSION
       timeout: 60m
-  port: 0
+  port: 4201
 
 spring:
   aop:

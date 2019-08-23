@@ -12,7 +12,7 @@ logging:
     org.springframework.security.oauth2: DEBUG
 
 server:
-  port: 0
+  port: 4201
 
 spring:
   cloud:
