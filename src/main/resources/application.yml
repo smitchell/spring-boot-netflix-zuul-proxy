@@ -4,21 +4,21 @@ example:
     logout-url: http://localhost:4200/angular-example
 zuul:
   add-proxy-headers: true
-  host:
-    socket-timeout-millis: 3600
-    connect-timeout-millis: 3600
+  sensitiveHeaders: Cookie,Set-Cookie
   ignoredPatterns: /**/health/**,/**/mappings/**
   ignored-services: "*"
-  # UPDATE THESE ROUTES WITH ROUTES FROM YOUR TEST ENVIRONMENT
   routes:
-    auth-service:
-      path: /auth-example/**
-      url: http://localhost:4202/
-      sensitiveHeaders: Access-Control-Allow-Origin,Access-Control-Allow-Credentials,Vary,Authorization
-      stripPrefix: false
     angular-example:
       path: /angular-example/**
-      url: http://localhost:4200/
+      url: http://localhost:4200/angular-example
+    auth-service:
+      path: /auth-example/**
+      url: http://localhost:4202/auth-example
+      sensitiveHeaders: Authorization
+      stripPrefix: false
+    oauth:
+      path: /oauth/**
+      url: http://localhost:4202/auth-example/oauth
 
 security:
   oauth2:
