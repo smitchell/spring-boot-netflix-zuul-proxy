@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // @formatter:off
     http
         .authorizeRequests()
-            .antMatchers(new String[]{"/login","/*.css","/*.js","/favicon.ico","/*.map","/robots.txt", "/zuul-proxy-example/**"})
+            .antMatchers("/login","/*.css","/*.js","/favicon.ico","/*.map","/robots.txt")
             .permitAll()
         .anyRequest().authenticated()
             .and()
