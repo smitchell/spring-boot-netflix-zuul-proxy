@@ -7,13 +7,13 @@ This is one of three projects referenced by https://github.com/spring-projects/s
 
 ## How to run this project locally
 
-1) The the Application class
+1) mvn spring-boot:run
 
 ## Validation
 
 1) Open the Angular App directly: http://localhost:4200/angular-example/
 2) Sign into Spring Security directly: http://localhost:4202/
-1) Access the Angular App via the proxy: http://localhost:4201/angular-example/
+1) Access the Angular App via the proxy: http://localhost:4201/angular-example
 
 
 

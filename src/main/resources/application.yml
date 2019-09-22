@@ -1,7 +1,7 @@
 # UPDATE THE PROXY ROUTE WITH THE ROUTE FROM YOUR TEST ENVIRONMENT
 example:
   proxy:
-    logout-url: http://localhost:4200/angular-example
+    logout-url: http://localhost:4200/angular-example/
 zuul:
   add-proxy-headers: true
   sensitiveHeaders: Cookie,Set-Cookie
@@ -10,15 +10,12 @@ zuul:
   routes:
     angular-example:
       path: /angular-example/**
-      url: http://localhost:4200/angular-example
+      url: http://localhost:4200/angular-example/
     auth-service:
       path: /auth-example/**
       url: http://localhost:4202/auth-example
       sensitiveHeaders: Authorization
       stripPrefix: false
-    oauth:
-      path: /oauth/**
-      url: http://localhost:4202/auth-example/oauth
 
 security:
   oauth2:
