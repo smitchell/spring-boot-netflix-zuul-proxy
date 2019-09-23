@@ -59,6 +59,5 @@ spring:
 
 logging:
   level:
-    com.example.proxy.Application: INFO
-    org.springframework.cloud.netflix.zuul: DEBUG
-    org.springframework.security.oauth2: DEBUG
+    ROOT: WARN
+    org.springframework.security: DEBUG

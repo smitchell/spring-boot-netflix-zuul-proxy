@@ -5,14 +5,11 @@ example:
 
 logging:
   level:
-    ROOT: ERROR
-    com.example.proxy.Application: INFO
-    com.netflix.zuul: DEBUG
-    org.springframework.cloud.netflix.zuul: DEBUG
-    org.springframework.security.oauth2: DEBUG
+    org.springframework.security.oauth: DEBUG
+    org.springframework.security: DEBUG
 
 server:
-  port: 4201
+  port: 8085
 
 spring:
   cloud:
