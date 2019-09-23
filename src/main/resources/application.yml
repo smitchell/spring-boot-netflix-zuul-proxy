@@ -1,7 +1,11 @@
 # UPDATE THE PROXY ROUTE WITH THE ROUTE FROM YOUR TEST ENVIRONMENT
 example:
   proxy:
-    logout-url: http://localhost:4200/angular-example/
+    logout-url: http://localhost:8085/
+proxy:
+  permitAll:
+    matches: /login,/*.js,/favicon.ico,*.map,/*.css,/robots.txt
+
 zuul:
   add-proxy-headers: true
   sensitiveHeaders: Cookie,Set-Cookie
@@ -20,8 +24,8 @@ zuul:
 security:
   oauth2:
     client:
-      accessTokenUri: http://localhost:4202/oauth/token
-      userAuthorizationUri: http://localhost:4202/oauth/authorize
+      accessTokenUri: http://localhost:8084/oauth/token
+      userAuthorizationUri: http://localhost:8084/oauth/authorize
       clientId: zuul-proxy-example
       clientSecret: password
     resource:
@@ -47,18 +51,14 @@ server:
       cookie:
         name: UISESSION
       timeout: 60m
-  port: 4201
+  port: 8085
 
 spring:
   aop:
     proxy-target-class: true
-  session:
-    store-type: jdbc
 
 logging:
   level:
-    ROOT: ERROR
     com.example.proxy.Application: INFO
-    com.netflix.zuul: DEBUG
     org.springframework.cloud.netflix.zuul: DEBUG
     org.springframework.security.oauth2: DEBUG

@@ -14,10 +14,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+@Slf4j
 @Configuration
 @EnableOAuth2Sso
-  @Order(SecurityProperties.DEFAULT_FILTER_ORDER)
-@Slf4j
+@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
@@ -48,16 +48,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // @formatter:off
     http
         .authorizeRequests()
-            .antMatchers("/login","/*.css","/*.js","/favicon.ico","/*.map","/robots.txt")
+            .antMatchers("/*.css","/*.js","/favicon.ico","/*.map","/robots.txt")
             .permitAll()
         .anyRequest().authenticated()
             .and()
         .logout()
             .invalidateHttpSession(true).permitAll()
-            .logoutSuccessUrl("/angular-example")
+            .deleteCookies("UISESSION")
+            .logoutSuccessUrl("/")
             .and()
         .csrf()
-            .disable(); //TODO turn this back on
+            .disable();
 //                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     // @formatter:on
 
