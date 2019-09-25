@@ -57,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
         .logout()
             .invalidateHttpSession(true).permitAll()
-            .logoutSuccessUrl("/angular-example/")
+            .logoutSuccessUrl("http://localhost:8085/angular-example/")
             .and()
         .csrf()
             .disable();
