@@ -46,11 +46,6 @@ management:
     skip-ssl-validation: true
 
 server:
-  servlet:
-    session:
-      cookie:
-        name: UISESSION
-      timeout: 60m
   port: 8085
 
 spring:

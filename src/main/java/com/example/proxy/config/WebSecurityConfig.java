@@ -9,6 +9,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.client.OAuth2ClientContext;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
+import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -17,7 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 @Slf4j
 @Configuration
 @EnableOAuth2Sso
-@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
+//@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
@@ -54,8 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
         .logout()
             .invalidateHttpSession(true).permitAll()
-            .deleteCookies("UISESSION")
-            .logoutSuccessUrl("/")
+            .logoutSuccessUrl("/angular-example/")
             .and()
         .csrf()
             .disable();
