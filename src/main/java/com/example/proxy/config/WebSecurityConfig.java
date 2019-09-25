@@ -61,9 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
         .csrf()
             .disable();
-//                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     // @formatter:on
-
   }
 
 }
