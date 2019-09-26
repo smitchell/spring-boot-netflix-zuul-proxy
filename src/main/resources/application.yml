@@ -15,7 +15,7 @@ zuul:
     angular-example:
       path: /angular-example/**
       url: http://localhost:4200/angular-example/
-    auth-service:
+    authorization-server:
       path: /authorization-server/**
       url: http://localhost:8084/authorization-server
       sensitiveHeaders: Authorization
