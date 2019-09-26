@@ -42,10 +42,6 @@ security:
           IwIDAQAB
           -----END PUBLIC KEY-----
 
-management:
-  cloudfoundry:
-    skip-ssl-validation: true
-
 server:
   port: 8085
 
