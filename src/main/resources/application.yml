@@ -49,7 +49,4 @@ spring:
   aop:
     proxy-target-class: true
 
-logging:
-  level:
-    ROOT: WARN
-    org.springframework.security: DEBUG
+

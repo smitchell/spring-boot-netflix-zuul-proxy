@@ -20,7 +20,6 @@ import org.springframework.web.filter.CorsFilter;
 @Slf4j
 @Configuration
 @EnableOAuth2Sso
-//@Order(SecurityProperties.DEFAULT_FILTER_ORDER)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Bean
