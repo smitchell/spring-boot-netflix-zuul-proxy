@@ -16,8 +16,8 @@ zuul:
       path: /angular-example/**
       url: http://localhost:4200/angular-example/
     auth-service:
-      path: /auth-example/**
-      url: http://localhost:8084/auth-example
+      path: /authorization-server/**
+      url: http://localhost:8084/authorization-server
       sensitiveHeaders: Authorization
       stripPrefix: false
 
@@ -26,7 +26,7 @@ security:
     client:
       accessTokenUri: http://localhost:8084/oauth/token
       userAuthorizationUri: http://localhost:8084/oauth/authorize
-      clientId: zuul-proxy-example
+      clientId: proxy-client
       clientSecret: client-secret
 #      auto-approve-scopes: '.*'
     resource:

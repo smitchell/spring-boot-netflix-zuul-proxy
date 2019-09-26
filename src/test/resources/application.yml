@@ -1,6 +1,6 @@
 example:
   proxy:
-    logout-url: https://zuul-proxy-example.cfapps.io/angular-example/
+    logout-url: https://localhost:8085/angular-example/
     permit-all-matches: /login,/*.css,/*.js,/home,/favicon.ico,/*.map,/robots.txt
 
 logging:
@@ -21,8 +21,8 @@ spring:
 security:
   oauth2:
     client:
-      client-id: zuul-proxy-example
-      client-secret: password
+      client-id: proxy-client
+      client-secret: client-secret
     resource:
       jwt:
         keyValue: |
