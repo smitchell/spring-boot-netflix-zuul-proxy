@@ -28,6 +28,7 @@ security:
       userAuthorizationUri: http://localhost:8084/oauth/authorize
       clientId: zuul-proxy-example
       clientSecret: client-secret
+#      auto-approve-scopes: '.*'
     resource:
       jwt:
         keyValue: |
